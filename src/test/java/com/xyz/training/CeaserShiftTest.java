@@ -20,6 +20,24 @@ public class CeaserShiftTest{
 	}
 	
 	@Test
+	public void shouldNotEncodeAnyNonAlphabeticalCharacters() throws Exception{
+		String output=caeserShift.encode("!",4);
+		assertThat(output,is("!"));
+	}
+	
+	@Test
+	public void shouldEnocdeWithAShiftOfNegativeNumbersGreaterThanAlphabetSize() throws Exception{
+		String output=caeserShift.encode("a",-27);
+		assertThat(output,is("z"));
+	}
+	
+	@Test
+	public void shouldEnocdeWithANegativeShift() throws Exception{
+		String output=caeserShift.encode("a",-1);
+		assertThat(output,is("z"));
+	}
+	
+	@Test
 	public void shouldEnocdeWithAShiftGreaterThanAlphabetSize() throws Exception{
 		String output=caeserShift.encode("z",27);
 		assertThat(output,is("a"));
