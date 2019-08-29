@@ -20,6 +20,24 @@ public class CeaserShiftTest{
 	}
 	
 	@Test
+	public void shouldEnocdeWithAShiftGreaterThanAlphabetSize() throws Exception{
+		String output=caeserShift.encode("z",27);
+		assertThat(output,is("a"));
+	}
+	
+	@Test
+	public void shouldEnocdeCharactersThatOverflowTheAlphabets() throws Exception{
+		String output=caeserShift.encode("z",1);
+		assertThat(output,is("a"));
+	}
+	
+	@Test
+	public void shouldEnocdeSmallAToSmallCForAShiftOfTwo() throws Exception{
+		String output=caeserShift.encode("a",2);
+		assertThat(output,is("c"));
+	}
+	
+	@Test
 	public void shouldEnocdeSmallAToSmallBForAShiftOfOne() throws Exception{
 		String output=caeserShift.encode("a",1);
 		assertThat(output,is("b"));
