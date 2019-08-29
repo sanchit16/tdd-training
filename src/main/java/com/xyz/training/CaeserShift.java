@@ -5,19 +5,40 @@ public class CaeserShift {
 	private static final int START = 97;
 	private static final int ALPHABET_SIZE = 26;
 
+	public String decode(String input, int shift) {
+		// TODO Auto-generated method stub
+		return encode(input,-shift);
+	}
+	
 	public String encode(String input, int shift) {
-		char character = input.toCharArray()[0];
-		if(!Character.isAlphabetic(character)) {
-			return String.valueOf((char)character);
+		StringBuilder builder = new StringBuilder();
+		char[] chars = input.toCharArray();
+		for (char character : chars) {
+			builder.append((char) applyShift(character, shift));
 		}
-		int value=input.toCharArray()[0] + shift % ALPHABET_SIZE;
-		if(value >= START + ALPHABET_SIZE) {
+		return builder.toString();
+	}
+
+	private int applyShift(char character, int shift) {
+		if (!Character.isAlphabetic(character)) {
+			return character;
+		}
+		int value = character + shift % ALPHABET_SIZE;
+		if (goesBeyondAlphabetSet(value)) {
 			value = value - ALPHABET_SIZE;
 		}
-		if(value < START) {
+		if (fallsBehindAlphabetSet(value)) {
 			value = value + ALPHABET_SIZE;
 		}
-		return String.valueOf((char)value);
+		return value;
+	}
+
+	private boolean fallsBehindAlphabetSet(int value) {
+		return value < START;
+	}
+
+	private boolean goesBeyondAlphabetSet(int value) {
+		return value >= START + ALPHABET_SIZE;
 	}
 
 }
