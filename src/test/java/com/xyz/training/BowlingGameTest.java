@@ -17,6 +17,12 @@ public class BowlingGameTest {
 	}
 
 	@Test
+	public void shouldHandleAPerfectGame() throws Exception {
+		rollMany(10, 12);
+		assertThat(game.score(), is(300));
+	}
+
+	@Test
 	public void shouldHandleAGameOfStrike() throws Exception {
 		rollAStrike();
 		game.roll(5);
